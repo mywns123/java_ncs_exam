@@ -4,7 +4,7 @@ package java_ncs_exam.exception;
 public class InValidationException extends RuntimeException{
 
 	public InValidationException() {
-		super("공백이 존재합니다.");		
+		super("형식이 맞지 않습니다.");		
 	}
 
 	public InValidationException(String message) {
@@ -12,7 +12,7 @@ public class InValidationException extends RuntimeException{
 	}
 
 	public InValidationException(Throwable cause) {
-		super("공백이 존재합니다.",cause);	
+		super("형식이 맞지 않습니다.",cause);	
 	}
 
 }

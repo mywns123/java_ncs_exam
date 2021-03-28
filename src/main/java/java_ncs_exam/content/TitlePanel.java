@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import java_ncs_exam.dto.Title;
-import java_ncs_exam.exception.InValidationException;
+import java_ncs_exam.exception.EmptyTfException;
 
 @SuppressWarnings("serial")
 public class TitlePanel extends JPanel {
@@ -63,14 +63,14 @@ public class TitlePanel extends JPanel {
 	
 	public Title getItem() {
 		validCheck();
-		int tNo = Integer.parseInt(tfNo.getText().trim());
-		String tName = tfName.getText().trim();
-		return new Title(tNo, tName);
+		int no = Integer.parseInt(tfNo.getText().trim());
+		String name = tfName.getText().trim();
+		return new Title(no, name);
 	}
 
 	private void validCheck() {
 		if (tfNo.getText().contentEquals("") || tfName.getText().equals("")) {
-			throw new InValidationException(); 
+			throw new EmptyTfException(); 
 		}		
 	}
 	

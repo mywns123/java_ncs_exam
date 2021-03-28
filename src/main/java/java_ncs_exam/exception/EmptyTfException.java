@@ -4,7 +4,7 @@ package java_ncs_exam.exception;
 public class EmptyTfException  extends RuntimeException {
 
 	public EmptyTfException() {
-		super("모두 입력하세요.");		
+		super("공란 존재");		
 	}
 
 	public EmptyTfException(String message) {
@@ -12,6 +12,6 @@ public class EmptyTfException  extends RuntimeException {
 	}
 
 	public EmptyTfException(Throwable cause) {
-		super("모두 입력하세요.",cause);	
+		super("공란 존재",cause);	
 	}
 }

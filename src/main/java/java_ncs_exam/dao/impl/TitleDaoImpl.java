@@ -42,9 +42,9 @@ public class TitleDaoImpl implements TitleDao {
 	}
 
 	private Title getTitle(ResultSet rs) throws SQLException {
-		int tNo = rs.getInt("tno");
-		String tName = rs.getString("tname");
-		return new Title(tNo,tName);
+		int no = rs.getInt("tno");
+		String name = rs.getString("tname");
+		return new Title(no,name);
 	}
 
 	@Override

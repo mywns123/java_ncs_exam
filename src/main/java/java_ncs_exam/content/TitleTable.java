@@ -1,44 +1,54 @@
 package java_ncs_exam.content;
 
+import java.awt.GridLayout;
 import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
-
-import java_ncs_exam.dto.Title;
-import java_ncs_exam.exception.NotSelectedException;
-
-import javax.swing.JScrollPane;
-import java.awt.GridLayout;
-
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import java_ncs_exam.dto.Title;
+import java_ncs_exam.exception.NotSelectedException;
+import java_ncs_exam.service.TitleService;
+
+@SuppressWarnings("serial")
 public class TitleTable extends JPanel {
+	private TitleService service;
 	private JTable table;
 	private List<Title> list;
 	
 	public TitleTable() {
+		initialize();
+	}
+	
+	private void initialize() {
 		setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane);
-		
+
 		table = new JTable();
 		table.setOpaque(false);
 		table.setModel(getModel());
 		scrollPane.setViewportView(table);		
-	}
+		
+	}	
 	
 	public DefaultTableModel getModel() {
 		CustomTableModel model = new CustomTableModel();
 		return model;
+	}
+	
+	public void setService(TitleService service) {
+		this.service = service;
 	}
 
 	public void loadData() {
@@ -47,10 +57,7 @@ public class TitleTable extends JPanel {
 	}
 	
 	public  void initList() {
-		/*
-		 * list = new Object[][] { {001, "사장"}, {002, "부장"}, {003, "과장"}, {004, "대리"},
-		 * {005, "사원"}, {006, "인턴"}, };
-		 */
+		list = service.showTitles();
 	};
 	
 	public void setList() {
@@ -71,8 +78,9 @@ public class TitleTable extends JPanel {
 	// 컬럼내용 정렬
 	setTableCellAlign(SwingConstants.CENTER, 0, 1);
 	// 컬럼 너비 조정
-	setTableCellWidth(100, 250);
+	setTableCellWidth(100, 100);
 	};
+	
 	protected void setTableCellWidth(int... width) {
 		TableColumnModel tcm = table.getColumnModel();
 
@@ -114,10 +122,7 @@ public class TitleTable extends JPanel {
 		table.setComponentPopupMenu(popMenu);
 	}	
 	
-	public Object[][] getData() {
-		return new Object[][] { { null, null }, };
-	}	
-	
+		
 	private class CustomTableModel extends DefaultTableModel {
 		public CustomTableModel() {
 		}
