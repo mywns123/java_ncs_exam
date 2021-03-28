@@ -4,7 +4,7 @@ package java_ncs_exam.exception;
 public class NotSelectedException extends RuntimeException{
 
 	public NotSelectedException() {
-		super("선택되지않았습니다.");		
+		super("해당 직책을 선택하세요.");		
 	}
 
 	public NotSelectedException(String message) {
@@ -12,6 +12,6 @@ public class NotSelectedException extends RuntimeException{
 	}
 
 	public NotSelectedException(Throwable cause) {
-		super("선택되지않았습니다.",cause);	
+		super("해당 직책을 선택하세요.",cause);	
 	}
 }

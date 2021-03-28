@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -11,6 +13,10 @@ import javax.swing.SwingConstants;
 
 import java_ncs_exam.dto.Title;
 import java_ncs_exam.exception.EmptyTfException;
+import java_ncs_exam.exception.InValidationException;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class TitlePanel extends JPanel {
@@ -38,7 +44,15 @@ public class TitlePanel extends JPanel {
 		panel_4.add(lblNo);
 		
 		tfNo = new JTextField();
+		tfNo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(((JFormattedTextField)e.getSource()).getText().length()>2)
+					throw new InValidationException();
+			}
+		});
 		tfNo.setColumns(10);
+		
 		panel_4.add(tfNo);
 		
 		JPanel panel_5 = new JPanel();
@@ -50,8 +64,17 @@ public class TitlePanel extends JPanel {
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_5.add(lblName);
 		
-		tfName = new JTextField();
+		tfName = new JTextField();		
+		/*
+		 * tfName.addKeyListener(new KeyAdapter() {
+		 * 
+		 * @Override public void keyTyped(KeyEvent e) { char c = e.getKeyChar();
+		 * 
+		 * if (!Character.isDigit(c)) { e.consume(); return; } } });
+		 */
+		
 		tfName.setColumns(10);
+		
 		panel_5.add(tfName);
 	}
 

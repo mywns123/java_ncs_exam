@@ -63,7 +63,7 @@ public class Title {
 
 	@Override
 	public String toString() {
-		return "Title [no=" + no + ", name=" + name + "]";
+		return "name(no)";
 	}
 	
 }
