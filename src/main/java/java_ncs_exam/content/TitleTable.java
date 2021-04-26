@@ -3,6 +3,7 @@ package java_ncs_exam.content;
 import java.awt.GridLayout;
 import java.util.List;
 
+import javax.lang.model.type.IntersectionType;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -101,7 +102,8 @@ public class TitleTable extends JPanel {
 	}
 
 	public Object[] toArray(Title t) {
-		return new Object[] { t.getNo(), t.getName() };
+		String no = String.format("%03d", t.getNo());
+		return new Object[] {"T"+ no, t.getName() };
 	}
 
 	public String[] getColumnNames() {
@@ -110,12 +112,13 @@ public class TitleTable extends JPanel {
 
 	public Title getItem() {
 		int row = table.getSelectedRow();
-		int titleNo = (int) table.getValueAt(row, 0);
-
 		if (row == -1) {
 			throw new NotSelectedException();
 		}
-		return list.get(list.indexOf(new Title(titleNo)));
+		String titleNo =(String) table.getValueAt(row, 0);
+		String t = titleNo.replace("T", "");
+		int t1 = Integer.parseInt(t);	
+		return list.get(list.indexOf(new Title(t1)));
 	}		
 	
 	public void setPopupMenu(JPopupMenu popMenu) {

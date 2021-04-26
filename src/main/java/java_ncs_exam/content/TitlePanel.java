@@ -3,9 +3,9 @@ package java_ncs_exam.content;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -14,9 +14,6 @@ import javax.swing.SwingConstants;
 import java_ncs_exam.dto.Title;
 import java_ncs_exam.exception.EmptyTfException;
 import java_ncs_exam.exception.InValidationException;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class TitlePanel extends JPanel {
@@ -43,16 +40,8 @@ public class TitlePanel extends JPanel {
 		lblNo.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lblNo);
 		
-		tfNo = new JTextField();
-		tfNo.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(((JFormattedTextField)e.getSource()).getText().length()>2)
-					throw new InValidationException();
-			}
-		});
-		tfNo.setColumns(10);
-		
+		tfNo = new JTextField();		
+		tfNo.setColumns(10);		
 		panel_4.add(tfNo);
 		
 		JPanel panel_5 = new JPanel();
@@ -65,16 +54,7 @@ public class TitlePanel extends JPanel {
 		panel_5.add(lblName);
 		
 		tfName = new JTextField();		
-		/*
-		 * tfName.addKeyListener(new KeyAdapter() {
-		 * 
-		 * @Override public void keyTyped(KeyEvent e) { char c = e.getKeyChar();
-		 * 
-		 * if (!Character.isDigit(c)) { e.consume(); return; } } });
-		 */
-		
-		tfName.setColumns(10);
-		
+		tfName.setColumns(10);		
 		panel_5.add(tfName);
 	}
 
@@ -86,9 +66,26 @@ public class TitlePanel extends JPanel {
 	
 	public Title getItem() {
 		validCheck();
+		check();
 		int no = Integer.parseInt(tfNo.getText().trim());
 		String name = tfName.getText().trim();
 		return new Title(no, name);
+	}
+
+	private void check() {
+		Pattern p =Pattern.compile("^[°¡-ÆR]*$");
+		String s = tfName.getText();		
+		Matcher m = p.matcher(s);
+		if(!m.find()) {
+			throw new InValidationException();
+		}
+		
+		Pattern p1 =Pattern.compile("^[0-9]*$");
+		String n =tfNo.getText();
+		Matcher m1 = p1.matcher(n);
+		if(!m1.find()|n.length()>3) {
+			throw new InValidationException();
+		}		
 	}
 
 	private void validCheck() {

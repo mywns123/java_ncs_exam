@@ -1,8 +1,9 @@
 package java_ncs_exam.control;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -20,8 +21,6 @@ import java_ncs_exam.exception.EmptyTfException;
 import java_ncs_exam.exception.InValidationException;
 import java_ncs_exam.exception.NotSelectedException;
 import java_ncs_exam.service.TitleService;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class Management extends JFrame implements ActionListener {
@@ -78,11 +77,11 @@ public class Management extends JFrame implements ActionListener {
 	private JPopupMenu createPopupMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
 
-		JMenuItem updateItem = new JMenuItem("부서 수정");
+		JMenuItem updateItem = new JMenuItem("직책 수정");
 		updateItem.addActionListener(this);
 		popMenu.add(updateItem);
 
-		JMenuItem deleteItem = new JMenuItem("부서 삭제");
+		JMenuItem deleteItem = new JMenuItem("직책 삭제");
 		deleteItem.addActionListener(this);
 		popMenu.add(deleteItem);
 
@@ -92,10 +91,10 @@ public class Management extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			if (e.getSource() instanceof JMenuItem) {
-				if (e.getActionCommand().equals("부서 삭제")) {
+				if (e.getActionCommand().equals("직책 삭제")) {
 					actionPerformdMenuDelete();
 				}
-				if (e.getActionCommand().equals("부서 수정")) {
+				if (e.getActionCommand().equals("직책 수정")) {
 					actionPerformdMenuUpdate();
 				}				
 			} else {
@@ -142,13 +141,13 @@ public class Management extends JFrame implements ActionListener {
 	};
 
 	protected void actionPerformedBtnUpdate(ActionEvent e) {
+		Title title = pTable.getItem();
 		Title updateTitle = pPanel.getItem();
 		service.modifyTitle(updateTitle);
-		pTable.loadData();
-		Title title = pPanel.getItem();
+		pTable.loadData();		
 		pPanel.clearTf();
 		btnAdd.setText("추가");
-		JOptionPane.showMessageDialog(null, updateTitle + "이()가"+ title + "로 변경되었습니다.","INFORMATION_MESSAGE",  JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, title + "이(가)"+ updateTitle + "로 변경되었습니다.","INFORMATION_MESSAGE",  JOptionPane.INFORMATION_MESSAGE);
 	};
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {

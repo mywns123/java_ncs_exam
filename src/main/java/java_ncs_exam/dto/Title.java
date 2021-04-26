@@ -33,11 +33,12 @@ public class Title {
 		this.name = name;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + no;
 		return result;
 	}
@@ -51,11 +52,6 @@ public class Title {
 		if (getClass() != obj.getClass())
 			return false;
 		Title other = (Title) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (no != other.no)
 			return false;
 		return true;
@@ -63,7 +59,7 @@ public class Title {
 
 	@Override
 	public String toString() {
-		return "name(no)";
+		return String.format("%s(%d)", name,no);
 	}
 	
 }
