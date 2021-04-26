@@ -35,8 +35,8 @@ public class TitlePanel extends JPanel {
 		panel_3.add(panel_4);
 		panel_4.setLayout(new GridLayout(0, 2, 10, 0));
 		
-		JLabel lblNo = new JLabel("¹øÈ£");
-		lblNo.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		JLabel lblNo = new JLabel("ï¿½ï¿½È£");
+		lblNo.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 12));
 		lblNo.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lblNo);
 		
@@ -48,8 +48,8 @@ public class TitlePanel extends JPanel {
 		panel_3.add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 2, 10, 0));
 		
-		JLabel lblName = new JLabel("Á÷Ã¥");
-		lblName.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		JLabel lblName = new JLabel("ï¿½ï¿½Ã¥");
+		lblName.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 12));
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_5.add(lblName);
 		
@@ -73,7 +73,7 @@ public class TitlePanel extends JPanel {
 	}
 
 	private void check() {
-		Pattern p =Pattern.compile("^[°¡-ÆR]*$");
+		Pattern p =Pattern.compile("^[ê°€-íž£]*$");
 		String s = tfName.getText();		
 		Matcher m = p.matcher(s);
 		if(!m.find()) {
